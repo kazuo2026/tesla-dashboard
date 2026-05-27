@@ -19,13 +19,13 @@ body{
     overflow:hidden;
 }
 
-/* ===================== */
-/* 上段 */
-/* ===================== */
+/* ========================= */
+/* 上部 */
+/* ========================= */
 
 .top-bar{
 
-    height:180px;
+    height:190px;
 
     display:flex;
 
@@ -38,15 +38,28 @@ body{
     box-sizing:border-box;
 }
 
-/* ===================== */
+/* ========================= */
+/* 左側 */
+/* ========================= */
+
+.left-section{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:30px;
+}
+
+/* ========================= */
 /* アナログ時計 */
-/* ===================== */
+/* ========================= */
 
 .analog-clock{
 
-    width:140px;
+    width:180px;
 
-    height:140px;
+    height:180px;
 
     border:4px solid #E0E0E0;
 
@@ -55,64 +68,80 @@ body{
     position:relative;
 }
 
+.center-dot{
+
+    position:absolute;
+
+    width:12px;
+
+    height:12px;
+
+    background:#E0E0E0;
+
+    border-radius:50%;
+
+    left:50%;
+
+    top:50%;
+
+    transform:translate(-50%,-50%);
+}
+
 .hand{
 
     position:absolute;
 
-    bottom:50%;
-
     left:50%;
 
-    transform-origin:bottom;
+    top:50%;
 
-    background:#E0E0E0;
+    transform-origin:bottom center;
+
+    border-radius:10px;
 }
+
+/* 時針 */
 
 .hour{
 
     width:6px;
 
-    height:40px;
+    height:50px;
+
+    background:#E0E0E0;
 
     margin-left:-3px;
+
+    margin-top:-50px;
 }
+
+/* 分針 */
 
 .minute{
 
     width:4px;
 
-    height:55px;
+    height:70px;
+
+    background:#E0E0E0;
 
     margin-left:-2px;
+
+    margin-top:-70px;
 }
 
-.second{
-
-    width:2px;
-
-    height:65px;
-
-    margin-left:-1px;
-
-    background:#888;
-}
-
-/* ===================== */
+/* ========================= */
 /* デジタル時計 */
-/* ===================== */
+/* ========================= */
 
 #clock{
 
-    font-size:110px;
+    font-size:140px;
 
     font-weight:bold;
 
     line-height:1;
 }
-
-/* ===================== */
-/* 日付 */
-/* ===================== */
 
 #date{
 
@@ -121,22 +150,22 @@ body{
     margin-top:10px;
 }
 
-/* ===================== */
+/* ========================= */
 /* 天気 */
-/* ===================== */
+/* ========================= */
 
 .weather{
 
-    width:420px;
+    width:430px;
 
     text-align:right;
 }
 
 .current-weather{
 
-    font-size:42px;
+    font-size:48px;
 
-    margin-bottom:10px;
+    margin-bottom:15px;
 }
 
 .hourly{
@@ -152,18 +181,18 @@ body{
 
     font-size:20px;
 
-    line-height:1.5;
+    line-height:1.6;
 }
 
-/* ===================== */
-/* 中央地図 */
-/* ===================== */
+/* ========================= */
+/* 地図 */
+/* ========================= */
 
 .map-area{
 
     width:100%;
 
-    height:calc(100vh - 320px);
+    height:calc(100vh - 340px);
 }
 
 .map-area iframe{
@@ -175,9 +204,9 @@ body{
     border:none;
 }
 
-/* ===================== */
+/* ========================= */
 /* テロップ */
-/* ===================== */
+/* ========================= */
 
 .ticker{
 
@@ -202,7 +231,7 @@ body{
 
     padding-left:100%;
 
-    animation:scroll 25s linear infinite;
+    animation:scroll 40s linear infinite;
 }
 
 @keyframes scroll{
@@ -236,27 +265,30 @@ body{
 
 <body>
 
-<!-- ===================== -->
-<!-- 上段 -->
-<!-- ===================== -->
+<!-- ========================= -->
+<!-- 上部 -->
+<!-- ========================= -->
 
 <div class="top-bar">
 
     <!-- 左 -->
-    <div style="display:flex; align-items:center; gap:30px;">
+
+    <div class="left-section">
 
         <!-- アナログ時計 -->
+
         <div class="analog-clock">
 
             <div class="hand hour" id="hour-hand"></div>
 
             <div class="hand minute" id="minute-hand"></div>
 
-            <div class="hand second" id="second-hand"></div>
+            <div class="center-dot"></div>
 
         </div>
 
         <!-- デジタル -->
+
         <div>
 
             <div id="clock"></div>
@@ -267,32 +299,21 @@ body{
 
     </div>
 
-    <!-- 右 -->
+    <!-- 右：天気 -->
+
     <div class="weather">
 
-        <div class="current-weather">
+        <div class="current-weather" id="current-weather">
 
-            ☀ 28℃
-
-        </div>
-
-        <div class="hourly">
-
-            18時 ☀ 27℃<br>
-
-            21時 ☁ 24℃<br>
-
-            24時 ☔ 22℃
+            読み込み中...
 
         </div>
 
-        <div class="weekly">
+        <div class="hourly" id="hourly-weather">
 
-            木 ☀ 29℃<br>
+        </div>
 
-            金 ☁ 26℃<br>
-
-            土 ☔ 22℃
+        <div class="weekly" id="weekly-weather">
 
         </div>
 
@@ -300,42 +321,42 @@ body{
 
 </div>
 
-<!-- ===================== -->
+<!-- ========================= -->
 <!-- 地図 -->
-<!-- ===================== -->
+<!-- ========================= -->
 
 <div class="map-area">
 
 <iframe
-src="https://www.google.com/maps/embed?pb=!1m18"
+src="https://www.google.com/maps?q=Tokyo&output=embed"
 allowfullscreen>
 </iframe>
 
 </div>
 
-<!-- ===================== -->
+<!-- ========================= -->
 <!-- ニュース -->
-<!-- ===================== -->
+<!-- ========================= -->
 
 <div class="ticker news">
 
-    <div class="ticker-text">
+    <div class="ticker-text" id="news-ticker">
 
-        【NEWS】最新ニュースをここへ表示　NHK RSS連携予定
+        ニュース読み込み中...
 
     </div>
 
 </div>
 
-<!-- ===================== -->
-<!-- 交通情報 -->
-<!-- ===================== -->
+<!-- ========================= -->
+<!-- 交通 -->
+<!-- ========================= -->
 
 <div class="ticker traffic">
 
     <div class="ticker-text">
 
-        【TRAFFIC】東名高速 渋滞5km　首都高 概ね順調
+        【TRAFFIC】首都高 概ね順調　東名高速 一部渋滞
 
     </div>
 
@@ -343,9 +364,9 @@ allowfullscreen>
 
 <script>
 
-/* ===================== */
-/* 時計更新 */
-/* ===================== */
+/* ========================= */
+/* 時計 */
+/* ========================= */
 
 function updateClock(){
 
@@ -381,21 +402,13 @@ function updateClock(){
 
     /* アナログ */
 
-    const sec = now.getSeconds();
-
     const min = now.getMinutes();
 
     const hour = now.getHours();
 
-    const secDeg = sec * 6;
-
-    const minDeg = min * 6 + sec * 0.1;
+    const minDeg = min * 6;
 
     const hourDeg = hour * 30 + min * 0.5;
-
-    document.getElementById("second-hand").style.transform =
-
-        `rotate(${secDeg}deg)`;
 
     document.getElementById("minute-hand").style.transform =
 
@@ -409,6 +422,81 @@ function updateClock(){
 setInterval(updateClock,1000);
 
 updateClock();
+
+/* ========================= */
+/* 天気 */
+/* ========================= */
+
+const apiKey = "ここにOpenWeatherAPIキー";
+
+const city = "Tokyo";
+
+fetch(
+
+https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=ja&appid=${apiKey}
+
+)
+
+.then(response => response.json())
+
+.then(data => {
+
+    const current = data.list[0];
+
+    document.getElementById("current-weather").innerHTML =
+
+        `${current.weather[0].icon.includes("d") ? "☀" : "☁"} ${Math.round(current.main.temp)}℃`;
+
+    let hourlyHTML = "";
+
+    for(let i=0;i<3;i++){
+
+        const item = data.list[i];
+
+        const time = item.dt_txt.substring(11,16);
+
+        hourlyHTML +=
+
+            `${time} ${Math.round(item.main.temp)}℃ ${item.weather[0].description}<br>`;
+    }
+
+    document.getElementById("hourly-weather").innerHTML = hourlyHTML;
+
+    let weeklyHTML = "";
+
+    for(let i=0;i<5;i++){
+
+        const item = data.list[i*8];
+
+        if(!item) continue;
+
+        const date = new Date(item.dt_txt);
+
+        const weekday = ["日","月","火","水","木","金","土"][date.getDay()];
+
+        weeklyHTML +=
+
+            `${weekday} ${Math.round(item.main.temp)}℃ ${item.weather[0].description}<br>`;
+    }
+
+    document.getElementById("weekly-weather").innerHTML = weeklyHTML;
+
+});
+
+/* ========================= */
+/* RSS */
+/* ========================= */
+
+/*
+後でGAS URLへ変更
+
+例：
+fetch("GASのURL")
+*/
+
+document.getElementById("news-ticker").innerHTML =
+
+"【NEWS】NHK RSS連携予定　最新ニュース表示";
 
 </script>
 
