@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tesla Dashboard</title>
+
+<style>
+body{
+    margin:0;
+    background:#000;
+    color:#E0E0E0;
+    font-family:Arial, sans-serif;
+    overflow:hidden;
+}
+
+/* 上部 */
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:30px 50px;
+}
+
+/* 時計 */
+#clock{
+    font-size:90px;
+    font-weight:bold;
+}
+
+/* 日付 */
+#date{
+    font-size:36px;
+}
+
+/* 下部ニュース */
+.news{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    background:#111;
+    overflow:hidden;
+    white-space:nowrap;
+    height:60px;
+    line-height:60px;
+    font-size:32px;
+}
+
+.news-text{
+    display:inline-block;
+    padding-left:100%;
+    animation:scroll 25s linear infinite;
+}
+
+@keyframes scroll{
+    0%{
+        transform:translateX(0);
+    }
+    100%{
+        transform:translateX(-100%);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top">
+    <div>
+        <div id="clock"></div>
+        <div id="date"></div>
+    </div>
+</div>
+
+<div class="news">
+    <div class="news-text">
+        Tesla Dashboard Demo　道路状況良好　安全運転でいきましょう
+    </div>
+</div>
+
+<script>
+
+function updateClock(){
+
+    const now = new Date();
+
+    // 時計
+    document.getElementById("clock").innerHTML =
+        now.toLocaleTimeString('ja-JP', {
+            hour:'2-digit',
+            minute:'2-digit'
+        });
+
+    // 日付
+    document.getElementById("date").innerHTML =
+        now.toLocaleDateString('ja-JP', {
+            year:'numeric',
+            month:'long',
+            day:'numeric',
+            weekday:'long'
+        });
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+</script>
+
+</body>
+</html>
