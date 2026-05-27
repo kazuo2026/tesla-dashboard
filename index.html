@@ -1,75 +1,131 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tesla Dashboard</title>
 
 <style>
 
 body{
+    margin:0;
     background:#000;
     color:#E0E0E0;
-    font-family:Arial;
-    text-align:center;
-    margin:0;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
 }
 
+/* 上段 */
+
+.top-bar{
+    height:140px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 50px;
+    box-sizing:border-box;
+}
+
+/* 時計 */
+
 #clock{
-    font-size:220px;
-    margin-top:80px;
+    font-size:110px;
     font-weight:bold;
 }
 
+/* 日付 */
+
 #date{
-    font-size:50px;
+    font-size:36px;
+    margin-top:-10px;
 }
 
-#weather{
-    margin-top:50px;
-    font-size:60px;
+/* 天気 */
+
+.weather{
+    text-align:right;
+    font-size:36px;
+    line-height:1.5;
 }
 
-.news{
+/* 地図 */
+
+.map-area{
+    width:100%;
+    height:calc(100vh - 220px);
+}
+
+.map-area iframe{
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+/* ニュース */
+
+.news-bar{
     position:absolute;
     bottom:0;
     width:100%;
-    height:70px;
-    line-height:70px;
+    height:60px;
     background:#111;
     overflow:hidden;
+    white-space:nowrap;
+    line-height:60px;
+    font-size:32px;
 }
 
 .news-text{
     display:inline-block;
     padding-left:100%;
-    animation:scroll 20s linear infinite;
-    font-size:36px;
+    animation:scroll 25s linear infinite;
 }
 
 @keyframes scroll{
+    0%{
+        transform:translateX(0);
+    }
+
     100%{
         transform:translateX(-100%);
     }
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div id="clock"></div>
+<div class="top-bar">
 
-<div id="date"></div>
+    <div>
+        <div id="clock"></div>
+        <div id="date"></div>
+    </div>
 
-<div id="weather">
-28℃
-☀ 晴れ
+    <div class="weather">
+        28℃<br>
+        ☀ 晴れ
+    </div>
+
 </div>
 
-<div class="news">
-<div class="news-text">
-最新ニュース　安全運転でいきましょう
+<div class="map-area">
+
+<iframe
+src="https://www.google.com/maps/embed?pb=!1m18"
+allowfullscreen>
+</iframe>
+
 </div>
+
+<div class="news-bar">
+
+    <div class="news-text">
+        【速報】交通状況は概ね良好です　安全運転でいきましょう
+    </div>
+
 </div>
 
 <script>
